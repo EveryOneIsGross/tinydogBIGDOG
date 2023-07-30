@@ -6,6 +6,7 @@ tinydogBIGDOG is a conversational chatbot that uses both local and cloud-based l
 
 The intent of tinydogBIGDOG is to provide a high-quality conversational experience while optimizing for efficiency and cost-effectiveness. By using a local model first, we can quickly generate responses for most queries. However, for more complex or nuanced queries, we escalate to the cloud-based model to ensure we provide the best possible response. This approach allows us to balance performance and cost, providing a high-quality service while minimizing the use of more expensive cloud-based resources.
 
+![tinydogbigdog](https://github.com/EveryOneIsGross/tinydogBIGDOG/assets/23621140/8e63570a-8dae-4754-9871-790907872c1b)
 
 ---
 
