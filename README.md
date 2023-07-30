@@ -6,12 +6,8 @@ tinydogBIGDOG is a conversational chatbot that uses both local and cloud-based l
 
 The intent of tinydogBIGDOG is to provide a high-quality conversational experience while optimizing for efficiency and cost-effectiveness. By using a local model first, we can quickly generate responses for most queries. However, for more complex or nuanced queries, we escalate to the cloud-based model to ensure we provide the best possible response. This approach allows us to balance performance and cost, providing a high-quality service while minimizing the use of more expensive cloud-based resources.
 
-## Consistent Chat Agent
-
-Despite using two different models, tinydogBIGDOG is designed to maintain a consistent conversational experience. The transition between the local and cloud-based models is seamless and invisible to the user, maintaining the illusion of a single, consistent chat agent throughout the conversation.
 
 ---
-![KmkAHcbm](https://github.com/EveryOneIsGross/tinydogBIGDOG/assets/23621140/965be07d-cfb7-4756-8f1d-f12d97f6e2c0)
 
 ## Features
 
@@ -23,9 +19,12 @@ Despite using two different models, tinydogBIGDOG is designed to maintain a cons
 
 **Keyword Extraction:** The chatbot extracts keywords from both the user's query and its own response, which can be used for further analysis or to guide the conversation.
 
-**Memories:** All conversations are stored in a JSON file for future reference and analysis. Additionally, the embeddings used for semantic search are stored in a pickle file.
 
+## Consistent and Persistent Chat Agent
 
+Despite using two different models, tinydogBIGDOG is designed to maintain a consistent conversational experience. The transition between the local and cloud-based models is seamless and invisible to the user, maintaining the illusion of a single, consistent chat agent throughout the conversation. All conversations are stored in a JSON file for future reference and analysis. Additionally, the embeddings used for semantic search are stored in a pickle file.
+
+![KmkAHcbm](https://github.com/EveryOneIsGross/tinydogBIGDOG/assets/23621140/965be07d-cfb7-4756-8f1d-f12d97f6e2c0)
 
 ## Usage
 
