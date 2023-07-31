@@ -1,6 +1,6 @@
 # tinydogBIGDOG
 
-tinydogBIGDOG is a conversational chatbot that uses both local and cloud-based language models to provide a seamless and enriched conversational experience. The chatbot is designed to first use a local language model (tinydog, powered by GPT-4All) and then, if necessary, escalate to a more powerful cloud-based model (BIGDOG, powered by OpenAI's GPT-3.5-turbo).
+tinydogBIGDOG is a conversational chatbot that uses both local and cloud-based language models to provide a seamless and enriched conversational experience. The chatbot is designed to first use a local language model (tinydog, powered by GPT-4All) and then, if necessary, escalate to a more powerful cloud-based model (BIGDOG, powered by OpenAI's GPT-3.5-turbo). Using essentially a student-teacher framework but at the chat end of the nn. 
 
 ## Intent
 
