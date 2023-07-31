@@ -12,13 +12,21 @@ The intent of tinydogBIGDOG is to provide a high-quality conversational experien
 
 ## Features
 
-**Semantic Search:** tinydogBIGDOG uses semantic search to enrich the conversation context, improving the quality of the generated responses.
+**Semantic Search:**
 
-**Cosine Similarity:** We use cosine similarity to measure the relevance of the generated response to the user's query. If the response from the local model is not similar enough to the query, we escalate to the cloud-based model.
+tinydogBIGDOG uses semantic search to enrich the conversation context, improving the quality of the generated responses.
 
-**Sentiment Analysis:** tinydogBIGDOG performs sentiment analysis on both the user's query and the chatbot's response, providing additional insights into the conversation.
+**Cosine Similarity:**
 
-**Keyword Extraction:** The chatbot extracts keywords from both the user's query and its own response, which can be used for further analysis or to guide the conversation.
+We use cosine similarity to measure the relevance of the generated response to the user's query. If the response from the local model is not similar enough to the query, we escalate to the cloud-based model.
+
+**Sentiment Analysis:**
+
+tinydogBIGDOG performs sentiment analysis on both the user's query and the chatbot's response, providing additional insights into the conversation.
+
+**Keyword Extraction:**
+
+The chatbot extracts keywords from both the user's query and its own response, which can be used for further analysis or to guide the conversation.
 
 
 ## Consistent and Persistent Chat Agent
