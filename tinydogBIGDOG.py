@@ -50,7 +50,7 @@ class OpenAIChatbot:
 
     def generate_response(self, query, last_response=None):
         messages = [
-            {"role": "system", "content": "You are cloud hosted query chatbot. Do not write lists, answer as directly as possible."},
+            {"role": "system", "content": "You are query chatbot. Do not write lists, answer as directly as possible."},
             {"role": "user", "content": query}
         ]
         if last_response:
@@ -117,7 +117,7 @@ boneSUMMARY = SentenceTransformerSummarizer()
 semantic_search_threshold = 1.0
 
 # Set the threshold for the cosine similarity score between the query and the chatbot's response
-response_similarity_threshold = 0.2 # high values will choose gpt4all_chatbot, low values will choose openai_chatbot
+response_similarity_threshold = 0.4 # high values will choose gpt4all_chatbot, low values will choose openai_chatbot
 
 # Initialize the chat history and embeddings
 chat_history = []
@@ -191,6 +191,7 @@ def get_response(query):
 
     query_embedding = np.array(gpt4all_chatbot.embed(query)).reshape(1, -1)
 
+
     if chat_history:
         similar_response = semantic_search(query_embedding, np.array(chat_history_embeddings))
         if similar_response >= semantic_search_threshold:
@@ -198,27 +199,37 @@ def get_response(query):
             similar_response = boneSUMMARY.summarize(similar_response)
             query += ' ' + similar_response
 
+    # Generate the response from GPT-4All
     gpt4all_response = gpt4all_chatbot.generate_response(query, last_response)
     logging.debug(f'GPT4All response: {gpt4all_response}')
     gpt4all_response_embedding = np.array(gpt4all_chatbot.embed(gpt4all_response)).reshape(1, -1)
-
+    
     similarity_score_gpt4all = cosine_similarity(query_embedding, gpt4all_response_embedding)
 
-    # Initialize model_used
+    # Initialize variables
+    response = None
     model_used = None
+    response_embedding = None
 
     if similarity_score_gpt4all >= response_similarity_threshold:
+        # If the GPT-4All response is above the threshold, use it
         response = gpt4all_response
         model_used = "smalldog"  # GPT-4All model
+        response_embedding = gpt4all_response_embedding
     else:
+        # If the GPT-4All response is below the threshold, generate a response from OpenAI
         openai_response = openai_chatbot.generate_response(query, last_response)
         logging.debug(f'OpenAI response: {openai_response}')
         openai_response_embedding = np.array(gpt4all_chatbot.embed(openai_response)).reshape(1, -1)
+        
         response = openai_response
         model_used = "BIGDOG"  # OpenAI model
+        response_embedding = openai_response_embedding
 
     # Append the embedding to the list
-    chat_history_embeddings.append(gpt4all_response_embedding if model_used == "smalldog" else openai_response_embedding)
+    chat_history_embeddings.append(response_embedding[0])
+
+
 
     # Extract keywords from the query and response after the response has been generated
     user_keywords = TextBlob(query).noun_phrases
@@ -236,6 +247,13 @@ def get_response(query):
     conversation_df.loc[len(conversation_df)] = [query, response, user_sentiment, bot_sentiment, user_keywords, bot_keywords, model_used]
     
     last_response = response
+
+    # Save the conversation to a JSON file
+    conversation_df.to_json('conversation.json', orient='records', lines=True, mode='a')
+
+    # Save the embeddings to a pickle file
+    with open('embeddings.pkl', 'wb') as f:
+        pickle.dump(chat_history_embeddings, f)
 
     return response
 
@@ -263,11 +281,3 @@ while True:
 
     # Print the bot's response
     print(f"Bot: {response}")
-
-
-# Save the conversation to a JSON file
-conversation_df.to_json('conversation.json', orient='records', lines=True, mode='a')
-
-# Save the embeddings to a pickle file
-with open('embeddings.pkl', 'wb') as f:
-    pickle.dump(chat_history_embeddings, f)
