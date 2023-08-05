@@ -12,9 +12,9 @@ The intent of tinydogBIGDOG is to provide a high-quality conversational experien
 
 ## Features
 
-**Semantic Search:**
+<S>**Semantic Search:**
 
-tinydogBIGDOG uses semantic search to enrich the conversation context, improving the quality of the generated responses.
+tinydogBIGDOG uses semantic search to enrich the conversation context, improving the quality of the generated responses.</S>
 
 **Cosine Similarity:**
 
